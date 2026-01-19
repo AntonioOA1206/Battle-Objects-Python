@@ -14,14 +14,18 @@ class Personaje():
     def atacar(self,objetivo):
         self.ataque = True
         self.objetivo = objetivo
-        if self.nombre == 'caballero':
+        if self.nombre == 'random':
+            self.objetivo.vida  = self.objetivo.vida - self.atk
+        elif self.nombre == 'caballero':
             self.objetivo.vida  = self.objetivo.vida - self.atk
         elif self.nombre == 'mago':
             self.objetivo.vida = self.objetivo.vida - self.atk_sp
     def __repr__(self):
-        if self.nombre == 'caballero':
+        if self.nombre == 'random':
             return f'{self.nombre} ha atacado a {self.objetivo.nombre} y le ha hecho {self.atk} de daño dejandolo a {self.objetivo.vida} PS' if self.ataque and self.objetivo else f'Soy {self.nombre}'
-        if self.nombre == 'mago':
+        elif self.nombre == 'caballero':
+            return f'{self.nombre} ha atacado a {self.objetivo.nombre} y le ha hecho {self.atk} de daño dejandolo a {self.objetivo.vida} PS' if self.ataque and self.objetivo else f'Soy {self.nombre}'
+        elif self.nombre == 'mago':
             return f'{self.nombre} ha atacado a {self.objetivo.nombre} y le ha hecho {self.atk_sp} de daño dejandolo a {self.objetivo.vida} PS' if self.ataque and self.objetivo else f'Soy {self.nombre}'
 
 class Fisico(Personaje):
@@ -30,7 +34,7 @@ class Fisico(Personaje):
 class Especial(Personaje):
     atk_sp = Personaje.atk_sp*2
 
-
+random = Personaje('random')
 caballero_enemigo = Fisico('caballero_enemigo')
 brujo = Especial('brujo')
 caballero = Fisico('caballero')
@@ -40,7 +44,8 @@ while True:
     try:
         print('1. Caballero')
         print('2. Mago')
-        elegir = int(input('Elige uno de los dos personajes jugables (1/2): '))
+        print('2. Random')
+        elegir = int(input('Elige uno de los tres personajes jugables (1/2/3): '))
 
         if elegir==1:
             elegir=caballero
@@ -48,12 +53,15 @@ while True:
         elif elegir==2:
             elegir=mago
             break
+        elif elegir==3:
+            elegir=random
+            break
         else:
-            print('Solo puedes elegir 1 o 2 idiota')
+            print('Solo puedes elegir 1, 2 o 3 idiota')
             sleep(1)
             os.system('cls')
     except:
-        print('Solo puedes elegir 1 o 2 idiota')
+        print('Solo puedes elegir 1, 2 o 3 idiota')
         sleep(1)
         os.system('cls')
 
