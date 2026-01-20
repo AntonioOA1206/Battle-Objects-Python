@@ -14,14 +14,14 @@ class Personaje():
     def atacar(self,objetivo):
         self.ataque = True
         self.objetivo = objetivo
-        if self.nombre == 'random':
+        if self.nombre == 'campesino':
             self.objetivo.vida  = self.objetivo.vida - self.atk
         elif self.nombre == 'caballero':
             self.objetivo.vida  = self.objetivo.vida - self.atk
         elif self.nombre == 'mago':
             self.objetivo.vida = self.objetivo.vida - self.atk_sp
     def __repr__(self):
-        if self.nombre == 'random':
+        if self.nombre == 'campesino':
             return f'{self.nombre} ha atacado a {self.objetivo.nombre} y le ha hecho {self.atk} de daño dejandolo a {self.objetivo.vida} PS' if self.ataque and self.objetivo else f'Soy {self.nombre}'
         elif self.nombre == 'caballero':
             return f'{self.nombre} ha atacado a {self.objetivo.nombre} y le ha hecho {self.atk} de daño dejandolo a {self.objetivo.vida} PS' if self.ataque and self.objetivo else f'Soy {self.nombre}'
@@ -34,7 +34,7 @@ class Fisico(Personaje):
 class Especial(Personaje):
     atk_sp = Personaje.atk_sp*2
 
-random = Personaje('random')
+campesino = Personaje('campesino')
 caballero_enemigo = Fisico('caballero_enemigo')
 brujo = Especial('brujo')
 caballero = Fisico('caballero')
@@ -44,7 +44,7 @@ while True:
     try:
         print('1. Caballero')
         print('2. Mago')
-        print('2. Random')
+        print('3. Campesino')
         elegir = int(input('Elige uno de los tres personajes jugables (1/2/3): '))
 
         if elegir==1:
@@ -54,7 +54,7 @@ while True:
             elegir=mago
             break
         elif elegir==3:
-            elegir=random
+            elegir=campesino
             break
         else:
             print('Solo puedes elegir 1, 2 o 3 idiota')
